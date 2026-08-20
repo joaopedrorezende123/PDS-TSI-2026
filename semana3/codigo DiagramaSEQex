@@ -1,0 +1,74 @@
+---
+config:
+  layout: elk
+---
+sequenceDiagram
+    actor Member as Membro
+    participant App as App Academia
+    participant Server@{ "type": "control" } as Servidor
+    actor Instructor as Instrutor
+    participant Database@{ "type": "database" } as Banco de Dados
+
+    rect rgb(238, 242, 255)
+    Note over Member,Database: Check-in na Academia
+    Member->>App: Abre App
+    Member->>App: Clica em Check-in
+    App->>Server: Envia requisição de check-in
+    Server->>Database: Registra presença do membro
+    Database-->>Server: Confirmação
+    Server-->>App: Check-in realizado
+    App-->>Member: Exibe mensagem de sucesso
+    end
+
+    rect rgb(240, 253, 250)
+    Note over Member,Database: Visualizar Ficha de Treino
+    Member->>App: Seleciona "Minha Ficha"
+    App->>Server: Solicita ficha pessoal
+    Server->>Database: Busca ficha do membro
+    Database-->>Server: Retorna dados da ficha
+    Server-->>App: Envia ficha de treino
+    App-->>Member: Exibe ficha com exercícios
+    end
+
+    rect rgb(245, 243, 255)
+    Note over Instructor,Database: Instrutor Atualiza Ficha
+    Instructor->>App: Acessa painel do instrutor
+    Instructor->>App: Seleciona aluno
+    Instructor->>App: Edita/Atualiza exercícios
+    App->>Server: Envia alterações de ficha
+    Server->>Database: Atualiza ficha no BD
+    Database-->>Server: Confirmação de atualização
+    Server-->>App: Ficha atualizada
+    App-->>Instructor: Exibe confirmação
+    end
+
+    rect rgb(255, 247, 237)
+    Note over Member,Database: Inscrição em Aulas em Grupo
+    Member->>App: Navega para "Aulas em Grupo"
+    App->>Server: Solicita lista de aulas disponíveis
+    Server->>Database: Busca aulas (Spinning, Zumba, etc)
+    Database-->>Server: Retorna aulas disponíveis
+    Server-->>App: Envia aulas com horários
+    App-->>Member: Exibe aulas disponíveis
+    Member->>App: Seleciona e se inscreve em aula
+    App->>Server: Registra inscrição
+    Server->>Database: Salva inscrição
+    Database-->>Server: Confirmação
+    Server-->>App: Inscrição confirmada
+    App-->>Member: Exibe confirmação de inscrição
+    end
+
+    rect rgb(253, 244, 255)
+    Note over Member,Database: Registrar Frequência e Gerar Relatórios
+    Member->>App: Participa de aula em grupo
+    App->>Server: Registra frequência na aula
+    Server->>Database: Salva presença na aula
+    Database-->>Server: Confirmação
+    Note over Instructor,Database: Gerência Solicita Relatório
+    Instructor->>App: Acessa relatórios
+    App->>Server: Solicita relatório de frequência
+    Server->>Database: Consulta frequências registradas
+    Database-->>Server: Retorna dados de frequência
+    Server-->>App: Processa e gera relatório
+    App-->>Instructor: Exibe relatório de frequência
+    end
