@@ -2,11 +2,11 @@
 
 ## Aulas
 
-Gustavo Inacio
-Felipe siloe
-Rennan Moraes
-João Pedro Resende
-Enzo Pultz
+Gustavo Inacio;
+Felipe siloe;
+Rennan Moraes;
+João Pedro Resende;
+Enzo Pultz;
 
 ### Semana 1
 * Apresentação da disciplina: metodologia de trabalho e avaliações:
