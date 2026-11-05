@@ -3,7 +3,7 @@
 ## Aulas
 
 Gustavo Inacio;
-Felipe siloe;
+Felipe siloe
 Rennan Moraes;
 João Pedro Resende;
 Enzo Pultz;
